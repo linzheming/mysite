@@ -1,0 +1,9 @@
+{% if latest_cookies_list %}
+    <ul>
+    {% for cookie in latest_cookies_list %}
+        <li><a href="/cookies/{{ cookie.id }}/">{{ cookie.text }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No cookies are available.</p>
+{% endif %}
