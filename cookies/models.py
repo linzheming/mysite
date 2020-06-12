@@ -98,6 +98,8 @@ class Cookies(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     json_format = models.CharField(max_length=3000)
+    ip = models.GenericIPAddressField(null=True)
+    ua = models.CharField(null=True, max_length=300)
 
     def save(self, *args, **kwargs):
         self.to_json()

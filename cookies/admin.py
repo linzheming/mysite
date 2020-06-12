@@ -37,7 +37,7 @@ from .models import Cookies
 
 @admin.register(Cookies)
 class CookiesAdmin(admin.ModelAdmin):
-    list_display = ('c_user', 'json_format', 'created', 'updated', )
+    list_display = ('c_user', 'json_format', 'ip', 'ua', 'created', 'updated', )
     list_filter = ('c_user', 'created')
     search_fields = ('c_user',)
     ordering = ('updated',)
