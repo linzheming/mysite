@@ -1,3 +1,4 @@
+from admin_numeric_filter.admin import RangeNumericFilter, NumericFilterModelAdmin
 from django.contrib import admin
 
 
@@ -36,11 +37,11 @@ export_to_csv.short_description = 'Export to CSV'
 from .models import Cookies
 
 @admin.register(Cookies)
-class CookiesAdmin(admin.ModelAdmin):
-    list_display = ('c_user', 'json_format', 'ip', 'ua', 'created', 'updated', )
-    list_filter = ('c_user', 'created')
+class CookiesAdmin(NumericFilterModelAdmin):
+    list_display = ('id', 'c_user', 'json_format', 'ip', 'ua', 'created', 'updated', )
+    list_filter = ('created',('id', RangeNumericFilter),)
     search_fields = ('c_user',)
-    ordering = ('updated',)
+    ordering = ('created',)
     actions = [export_to_csv]
 
     #  in the forms on the “add” and “change” pages

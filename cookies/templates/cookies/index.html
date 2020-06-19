@@ -1,7 +1,7 @@
 {% if latest_cookies_list %}
     <ul>
     {% for cookie in latest_cookies_list %}
-        <li><a href="/cookies/{{ cookie.id }}/">{{ cookie.text }}</a></li>
+        <li>{{ cookie.id }}   创建时间：{{ cookie.created }} ip： {{ cookie.ip }} </li>
     {% endfor %}
     </ul>
 {% else %}

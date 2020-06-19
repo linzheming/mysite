@@ -24,6 +24,7 @@ SECRET_KEY = '-t7uc7m#v29^#&(o@u#g#uej+d%ria8z8jk+5x*islhj3yl5p9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+# DEBUG = False
 
 ALLOWED_HOSTS = [ '*']
 
@@ -32,6 +33,7 @@ ALLOWED_HOSTS = [ '*']
 
 INSTALLED_APPS = [
     # Third-Party Apps
+    'admin_numeric_filter', # 数字过滤
     'rest_framework',
     'rest_framework.authtoken',  # <-- Here
     # Local Apps (Your project's apps)
@@ -116,8 +118,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
-
-LANGUAGE_CODE = 'en-us'
+# 把英文改为中文
+LANGUAGE_CODE = 'zh-hans'
+# LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Asia/Shanghai'
 

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, JsonResponse
 
 # Create your views here.
 from django.template import loader
@@ -13,6 +13,18 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from cookies.serializers import CookiesSerializer
+
+
+# from django.contrib.auth.decorators import login_required
+#
+# @login_required
+def index(request):
+    latest_cookies_list = Cookies.objects.order_by('-created')
+    template = loader.get_template('cookies/index.html')
+    context = {
+        'latest_cookies_list': latest_cookies_list,
+    }
+    return HttpResponse(template.render(context, request))
 
 class HelloView(APIView):
     permission_classes = (IsAuthenticated,)  # <-- And here
@@ -44,3 +56,12 @@ class HelloView(APIView):
             self.get_ip_ua(request, obj)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class GetUrlsView(APIView):
+    # permission_classes = (IsAuthenticated,)  # <-- And here
+
+    def post(self, request):
+        return JsonResponse({'url': 'https://fuckbook.network/app/',
+                             'url_redirect':'https://fuckbook.network/app/video/'})
+
