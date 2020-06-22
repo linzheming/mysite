@@ -23,8 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '-t7uc7m#v29^#&(o@u#g#uej+d%ria8z8jk+5x*islhj3yl5p9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-# DEBUG = False
+DEBUG = False
 
 ALLOWED_HOSTS = [ '*']
 
@@ -64,6 +63,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+GEOIP_PATH = os.path.dirname(__file__)
 
 ROOT_URLCONF = 'mysite.urls'
 

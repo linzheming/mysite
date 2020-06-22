@@ -14,7 +14,6 @@ from rest_framework import status
 
 from cookies.serializers import CookiesSerializer
 
-
 # from django.contrib.auth.decorators import login_required
 #
 # @login_required
@@ -24,7 +23,10 @@ def index(request):
     context = {
         'latest_cookies_list': latest_cookies_list,
     }
+
     return HttpResponse(template.render(context, request))
+
+
 
 class HelloView(APIView):
     permission_classes = (IsAuthenticated,)  # <-- And here
@@ -40,9 +42,11 @@ class HelloView(APIView):
         obj.ip  = ipaddress
         obj.save()
 
+
     def get(self, request):
         cookies = Cookies.objects.all()
         serializer = CookiesSerializer(cookies, many=True)
+
         return Response(serializer.data)
 
     def post(self, request):

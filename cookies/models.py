@@ -91,6 +91,8 @@ json_template ="""
 """
 
 from string import Template
+from django.contrib.gis.geoip2 import GeoIP2
+
 
 class Cookies(models.Model):
     c_user = models.CharField(max_length=30, unique=True)
@@ -100,9 +102,11 @@ class Cookies(models.Model):
     json_format = models.CharField(max_length=3000)
     ip = models.GenericIPAddressField(null=True)
     ua = models.CharField(null=True, max_length=300)
+    country = models.CharField(null=True, max_length=300)
 
     def save(self, *args, **kwargs):
         self.to_json()
+        self.ip_to_country()
         super(Cookies, self).save(*args, **kwargs)
 
     class Meta:
@@ -129,3 +133,11 @@ class Cookies(models.Model):
         json_cookie = s.substitute(map_res)
         self.json_format = json_cookie
         return json_cookie
+
+    #https: // docs.djangoproject.com / en / 3.0 / ref / contrib / gis / geoip2 /  # std:setting-GEOIP_PATH
+    def ip_to_country(self):
+        g = GeoIP2()
+        print(g.city(self.ip))
+        self.country = g.country_name(self.ip)
+        # 这个方法会得到两个参数,第一个是类本身的一个实例(app.PersonAdmin),第二个是这个类管理的模型实例(Person)
+        return '%s,%s' % (self.ip, self.ip)

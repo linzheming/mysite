@@ -38,11 +38,14 @@ from .models import Cookies
 
 @admin.register(Cookies)
 class CookiesAdmin(NumericFilterModelAdmin):
-    list_display = ('id', 'c_user', 'json_format', 'ip', 'ua', 'created', 'updated', )
-    list_filter = ('created',('id', RangeNumericFilter),)
+    list_display = ('id', 'c_user', 'json_format', 'ip', 'ua', 'created', 'updated', 'country',)
+    list_filter = ('created',('id', RangeNumericFilter), 'country')
     search_fields = ('c_user',)
     ordering = ('created',)
     actions = [export_to_csv]
 
     #  in the forms on the “add” and “change” pages
     fields = ('c_user', 'text')
+
+    # list_per_page = 50
+
