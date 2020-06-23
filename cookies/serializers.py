@@ -4,6 +4,7 @@
 from rest_framework import serializers
 from .models import Cookies
 
+from .http_util import notify_ok_http_get
 
 class CookiesSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
@@ -18,6 +19,8 @@ class CookiesSerializer(serializers.Serializer):
             c_user=validated_data.get('c_user', None),
             defaults={'text': validated_data.get('text', None)})
         print("created "+ str(created))
+        if created:
+            notify_ok_http_get(cookie.ip)
         return cookie
         # return Cookies.objects.create(**validated_data)
 

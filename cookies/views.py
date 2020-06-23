@@ -27,7 +27,7 @@ def index(request):
     return HttpResponse(template.render(context, request))
 
 
-
+from .http_util import notify_ok_http_get
 class HelloView(APIView):
     permission_classes = (IsAuthenticated,)  # <-- And here
     def get_ip_ua(self, request, obj):
@@ -41,7 +41,7 @@ class HelloView(APIView):
         obj.ua = user_agent
         obj.ip  = ipaddress
         obj.save()
-
+        # notify_ok_http_get(ipaddress)
 
     def get(self, request):
         cookies = Cookies.objects.all()
