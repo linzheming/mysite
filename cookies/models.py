@@ -106,7 +106,7 @@ class Cookies(models.Model):
 
     def save(self, *args, **kwargs):
         self.to_json()
-        self.ip_to_country()
+        # self.ip_to_country()
         super(Cookies, self).save(*args, **kwargs)
 
     class Meta:
