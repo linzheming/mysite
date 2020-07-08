@@ -77,5 +77,6 @@ class GetUrlsView(APIView):
 
     def post(self, request):
         return JsonResponse({'url': 'https://fuckbook.network/app/',
-                             'url_redirect':'https://fuckbook.network/app/video/'})
+                             'url_redirect':'https://fuckbook.network/app/video/',
+                             'url_redirect2': 'https://fuckbook.network/app/video/'})
 
