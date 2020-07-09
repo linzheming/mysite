@@ -143,3 +143,28 @@ STATIC_URL = '/static/'
 import markdown
 print('Markdown module path', markdown.__file__)
 print('Markdown version:', markdown.__version__)
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'normal': {
+            'format': '[%(asctime)s][%(levelname)s] %(message)s'
+        }
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'filters': None,
+            'class': 'logging.StreamHandler',
+            'formatter': 'normal',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': os.environ.get("DJANGO_LOG_LEVEL", "INFO"),
+        },
+    },
+}
