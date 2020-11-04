@@ -52,9 +52,6 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.TokenAuthentication',  # <-- And here
     ],
-
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 10
 }
 
 MIDDLEWARE = [
@@ -171,6 +168,3 @@ LOGGING = {
         },
     },
 }
-
-
-DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240 # higher than the count of fields
