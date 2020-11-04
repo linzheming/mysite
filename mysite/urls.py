@@ -15,8 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from cookies.admin_cookies_my import cookie_my_admin_site
 
 urlpatterns = [
     path('cookies/', include('cookies.urls')),
     path('admin/', admin.site.urls),
+    path('cookie_my_admin/', cookie_my_admin_site.urls),
 ]
+
+

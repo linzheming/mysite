@@ -16,6 +16,11 @@ def export_to_csv(modeladmin, request, queryset):
 
     fields = [field for field in opts.get_fields() if not field.many_to_many \
               and not field.one_to_many]
+
+    # 删除一些字段
+    filter = ['username','pwd', 'created', 'updated', 'country', 'getFriendsNum', 'getPagesNum']
+    fields = [x for x in fields if x.name not in filter]
+
     # Write a first row with header information
     writer.writerow([field.verbose_name for field in fields])
     # Write data rows
@@ -38,7 +43,7 @@ from .models import Cookies
 
 @admin.register(Cookies)
 class CookiesAdmin(NumericFilterModelAdmin):
-    list_display = ('id', 'c_user', 'username', 'pwd', 'json_format', 'ip', 'ua', 'created', 'updated')
+    list_display = ('id', 'c_user', 'json_format', 'ip', 'ua', 'created', 'updated')
     list_filter = ('created',('id', RangeNumericFilter), )
     # list_filter = ('created',('id', RangeNumericFilter), 'country')
     search_fields = ('c_user',)
@@ -49,4 +54,7 @@ class CookiesAdmin(NumericFilterModelAdmin):
     fields = ('c_user', 'text')
 
     # list_per_page = 50
+
+
+
 
