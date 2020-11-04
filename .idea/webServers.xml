@@ -2,8 +2,8 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="69e2afb6-3393-4bf9-9a76-fb8a06955e4e" name="vnc" url="http://118.190.99.53">
-        <fileTransfer host="118.190.99.53" port="22" rootFolder="/root" accessType="SFTP">
+      <webServer id="69e2afb6-3393-4bf9-9a76-fb8a06955e4e" name="aliyun" url="http://120.79.219.178/admin">
+        <fileTransfer host="120.79.219.178" port="22" rootFolder="/root/.docker/learn_docker" accessType="SFTP">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" />
           </advancedOptions>
