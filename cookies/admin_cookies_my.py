@@ -66,3 +66,10 @@ class CookiesMyAdmin(admin.ModelAdmin):
     fields = ('c_user', 'text')
 
 cookie_my_admin_site.register(Cookies_my, CookiesMyAdmin)
+
+
+# 增加显示 Cookie model
+from .models import Cookies
+
+cookie_my_admin_site.register(Cookies, CookiesMyAdmin)
+
